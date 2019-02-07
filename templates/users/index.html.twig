@@ -2,4 +2,45 @@
 
 {% block title %}SymfJunior{% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+
+    {% if users %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Index</th>
+                <th scope="col">Index_start_at</th>
+                <th scope="col">Integer</th>
+                <th scope="col">Float</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Fullname</th>
+                <th scope="col">Email</th>
+                <th scope="col">Bool</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr class="table-light">
+                <td>{{ user.index }}</td>
+                <td>{{ user.index_start_at }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>{{ user.index }}</td>
+                <td>
+                    <a href="/user/{{ user.index }}" class="btn btn-dark">Show</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No articles to display</p>
+    {% endif %}
+
+{% endblock %}
