@@ -9,7 +9,7 @@
             <thead>
             <tr>
                 <th scope="col">Index</th>
-                <th scope="col">Index_start_at</th>
+                <th scope="col">Index Start At</th>
                 <th scope="col">Integer</th>
                 <th scope="col">Float</th>
                 <th scope="col">Name</th>
@@ -23,15 +23,14 @@
             {% for user in users %}
             <tr class="table-light">
                 <td>{{ user.index }}</td>
-                <td>{{ user.index_start_at }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
-                <td>{{ user.index }}</td>
+                <td>{{ user.indexstartat }}</td>
+                <td>{{ user.somenumber }}</td>
+                <td>{{ user.floater }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.fullname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.bully }}</td>
                 <td>
                     <a href="/user/{{ user.index }}" class="btn btn-dark">Show</a>
                 </td>
@@ -40,7 +39,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>No articles to display</p>
+        <p>No users to display</p>
     {% endif %}
 
 {% endblock %}

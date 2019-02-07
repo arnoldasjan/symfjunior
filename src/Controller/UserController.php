@@ -1,8 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\User;
-
+use App\Entity\Users;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -15,9 +14,7 @@ class UserController extends AbstractController {
      */
     public function index() {
 
-
-
-        $users = ['user1'];
+        $users = $this->getDoctrine()->getRepository(Users::class)->findAll();
 
 
         return $this -> render('users/index.html.twig', array('users' => $users));
