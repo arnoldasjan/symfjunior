@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    {{ form_start(form)  }}
+    {{ form_widget(form) }}
+    <a class="btn btn-secondary" href="/">Go Back</a>
+    {{ form_end(form) }}
+{% endblock %}

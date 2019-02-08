@@ -5,7 +5,7 @@
 {% block body %}
 
     {% if users %}
-        <table class="table table-hover">
+        <table id="users" class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Index</th>
@@ -32,14 +32,23 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.bully }}</td>
                 <td>
-                    <a href="/user/{{ user.index }}" class="btn btn-dark">Show</a>
+                    <a href="/user/{{ user.id }}" class="btn btn-dark">Show</a>
+                    <a href="/user/edit/{{ user.id }}" class="btn btn-secondary">Edit</a>
+                    <a href="/" class="btn btn-danger delete-user" data-id="{{ user.id }}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
             </tbody>
         </table>
+        <div class="text-center">
+            {{ knp_pagination_render(users) }}
+        </div>
     {% else %}
         <p>No users to display</p>
     {% endif %}
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
 {% endblock %}

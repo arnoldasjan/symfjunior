@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymfJunior{% endblock %}
+
+{% block body %}
+    <h1>{{ user.fullname }}</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Index</th>
+            <th scope="col">Index Start At</th>
+            <th scope="col">Integer</th>
+            <th scope="col">Float</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Bool</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="table-light">
+                <td>{{ user.index }}</td>
+                <td>{{ user.indexstartat }}</td>
+                <td>{{ user.somenumber }}</td>
+                <td>{{ user.floater }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.bully }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <a class="btn btn-secondary" href="/">Go Back</a>
+
+{% endblock %}
