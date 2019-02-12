@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Comment;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -60,6 +62,12 @@ class Users
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $bully;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="appUser", cascade={"all"})
+     * @ORM\OrderBy({"id" = "desc"})
+     */
+    private $comments;
 
     public function getId(): ?int
     {
@@ -171,6 +179,22 @@ class Users
     {
         $this->bully = $bully;
 
+        return $this;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Collection
+     */
+    public function getComments() : Collection
+    {
+        return $this->comments;
+    }
+    public function addComment(Comment $userComment)
+    {
+        $userComment->setAppUser($this);
+        $this->comments[] = $userComment;
         return $this;
     }
 }

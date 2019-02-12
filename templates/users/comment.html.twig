@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% set appUserId = app.request.get('id') %}
+
+{% block title %}SymfJunior{% endblock %}
+
+{% block body %}
+
+    {% if comments %}
+        <div class="wrapper">
+            <div class="row">
+                <table id="comments" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Comments</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for f in comments %}
+                        <tr class="table-light">
+                            <td>{{ f.comment }}</td>
+                            <td>
+                                <a href="/" class="btn btn-danger delete-comment" data-id="{{ f.id }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <a class="btn btn-secondary" href="/">Go Back</a>
+            {{ form_end(form) }}
+            <div class="text-center">
+                {{ knp_pagination_render(comments) }}
+            </div>
+        </div>
+    {% else %}
+        <p>No comments to display</p>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}

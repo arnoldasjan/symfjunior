@@ -24,9 +24,25 @@ class UserController extends AbstractController {
     public function index(Request $request, PaginatorInterface $paginator) {
 
         $em = $this->getDoctrine()->getManager();
-        $allUsers=$em->getRepository('App:Users')->findAll();
+        $queryBuilder = $em->getRepository('App:Users')->createQueryBuilder('us');
+
+        if ($request->query->getAlnum('query')) {
+            $queryBuilder
+                ->where('us.fullname LIKE :fullname')
+                ->orwhere('us.email LIKE :email')
+                ->orwhere('us.first_name LIKE :first_name')
+                ->orwhere('us.surname LIKE :surname')
+                ->setParameter('fullname', '%' . $request->query->getAlnum('query') . '%')
+                ->setParameter('email', '%' . $request->query->getAlnum('query') . '%')
+                ->setParameter('first_name', '%' . $request->query->getAlnum('query') . '%')
+                ->setParameter('surname', '%' . $request->query->getAlnum('query') . '%');
+        }
+
+        $query = $queryBuilder->getQuery();
+
+
         $result = $paginator->paginate(
-            $allUsers,
+            $query,
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 25)
         );
@@ -75,7 +91,6 @@ class UserController extends AbstractController {
      * @Method({"GET", "POST"})
      */
     public function edit(Request $request, $id) {
-        $user = new Users();
         $user = $this->getDoctrine()->getRepository(Users::class)->find($id);
 
         $form = $this->createFormBuilder($user)
@@ -98,6 +113,7 @@ class UserController extends AbstractController {
         if($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->merge($form->getData());
             $entityManager->flush();
 
             return $this->redirectToRoute('user_list');
